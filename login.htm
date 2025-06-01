@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do Consultor</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://proz-arquitetos-pi.s3.sa-east-1.amazonaws.com/images/cloud-image.png') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            padding: 15px;
+            background-color: #000; 
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo i {
+            margin-right: 8px;
+        }
+
+        .header-buttons { 
+            display: flex;
+            gap: 10px; 
+        }
+
+        .header-buttons a {
+            color: #fff;
+            text-decoration: none;
+            background-color: #3b82f6;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px; 
+        }
+
+        .header-buttons a:hover {
+            background-color: #2563eb;
+            text-decoration: none;
+        }
+
+        .login-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            background-color: #000;
+            padding: 30px;
+            min-width: 300px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .login-box h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .login-box a.login-btn {
+            display: inline-block;
+            width: 100%;
+            background-color: #3b82f6;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .login-box a.login-btn:hover {
+            background-color: #2563eb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #000; 
+            color: #fff;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                font-size: 16px;
+                padding: 10px;
+                flex-direction: column; 
+                align-items: flex-start;
+                gap: 10px; 
+            }
+
+            .header-buttons {
+                flex-direction: column; 
+                align-items: stretch; 
+                gap: 5px;
+            }
+
+            .header-buttons a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .login-box {
+                padding: 20px;
+                min-width: auto;
+            }
+
+            .login-box h2 {
+                font-size: 20px;
+            }
+
+            .login-box a.login-btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            footer {
+                font-size: 10px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'"><i data-lucide="cloud"></i> Proz Cloud</div>
+        <div class="header-buttons">
+            <a href="index.html"><i data-lucide="home"></i> Início</a>
+            <a href="formulario.html"><i data-lucide="file-text"></i> Solicite um Orçamento</a>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h2><i data-lucide="user"></i> Painel do Consultor</h2>
+            <a class="login-btn" href="https://sa-east-1nuircal4r.auth.sa-east-1.amazoncognito.com/login?response_type=token&client_id=6uufme34atdbq7mgtbe8biglu5&redirect_uri=https://proz-arquitetos-pi.s3.sa-east-1.amazonaws.com/consultor.html">
+                <i data-lucide="log-in"></i> Fazer login
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 Proz Cloud. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

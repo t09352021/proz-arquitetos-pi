@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proz Cloud</title>
+  <script src="https://unpkg.com/lucide @latest/dist/umd/lucide.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-image: url('https://proz-arquitetos-pi.s3.sa-east-1.amazonaws.com/images/cloud-wallpaper.png ');
+      background-size: cover;
+      background-position: center;
+      color: #1f1f1f;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .logo i {
+      margin-right: 10px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      color: #60a5fa;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .button {
+      background-color: #2563eb;
+      color: white;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    nav .button-link {
+      text-decoration: none;
+      color: white;
+    }
+
+    .button-link:hover {
+      color: white;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 2rem auto;
+      background-color: rgba(255, 255, 255, 0.92);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    .content h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .service {
+      background: rgba(0, 0, 0, 0.85);
+      color: #ffffff;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+      background: rgba(37, 99, 235, 0.9);
+      box-shadow: 0 6px 12px rgba(37, 99, 235, 0.6);
+    }
+
+    .aws-badge-container {
+      max-width: 400px;
+      margin: 2rem auto 3rem auto;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 1.5rem 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    .aws-badge-container p {
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .aws-badge img {
+      max-width: 250px;
+      height: auto;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    #proznews {
+      max-width: 900px;
+      margin: 2rem auto;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    .proznews-container {
+      background-color: #082f6e;
+      color: #ffffff;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+
+    .proznews-container h3 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .proznews-container p {
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .proznews-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-direction: column;
+      padding-top: 1rem;
+    }
+
+    .proznews-form input {
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 400px;
+      color: #1f1f1f;
+    }
+
+    .proznews-form button {
+      background-color: #60a5fa;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .proznews-form button:hover {
+      background-color: #2563eb;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    @media (min-width: 768px) {
+      .services {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      header {
+        padding: 1rem 2rem;
+        flex-wrap: nowrap;
+      }
+
+      nav {
+        gap: 1.5rem;
+      }
+
+      .logo {
+        margin-bottom: 0;
+      }
+
+      .nav-right {
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        width: 100%;
+      }
+
+      nav a {
+        margin-left: 0;
+        width: 100%;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+
+      .nav-right {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        width: 100%;
+      }
+
+      .button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .proznews-form {
+        width: 100%;
+        padding: 0 10px;
+      }
+
+      .proznews-form input,
+      .proznews-form button {
+        max-width: 100%;
+      }
+
+      .content,
+      #proznews,
+      .aws-badge-container {
+        margin: 1rem;
+        padding: 1rem;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <i data-lucide="cloud"></i> Proz Cloud
+    </div>
+    <nav class="nav-right">
+      <a href="login.html" class="button">
+        <i data-lucide="layout"></i>
+        <span class="button-link">Painel do Consultor</span>
+      </a>
+      <a href="#proznews" class="button">
+        <i data-lucide="newspaper"></i>
+        <span class="button-link">ProzNews</span>
+      </a>
+      <a href="#" class="button">
+        <i data-lucide="headphones"></i>
+        <span class="button-link">Central de suporte</span>
+      </a>
+      <a href="formulario.html" class="button">
+        <i data-lucide="file-text"></i>
+        <span class="button-link">Solicite um orçamento</span>
+      </a>
+    </nav>
+  </header>
+
+  <section class="content">
+    <h2>Sua jornada para a nuvem começa aqui</h2>
+    <p>Especialistas em migração de ambientes on-premise para AWS, armazenamento seguro de dados e automação com
+      infraestrutura como código. Soluções sob medida para sua empresa crescer com tecnologia de ponta.</p>
+  </section>
+
+  <section class="content">
+    <h2>Nossa missão: acelerar sua transformação digital</h2>
+    <p>Na Proz Cloud, somos apaixonados por ajudar empresas a alcançarem o sucesso na nuvem. Somos parceiros AWS
+      Advanced e entregamos projetos com alta eficiência, segurança e escalabilidade, sempre com uma equipe experiente e
+      certificada.</p>
+  </section>
+
+  <section class="content">
+    <h2>Soluções para o seu negócio</h2>
+    <div class="services">
+      <div class="service">
+        Migração de ambiente para a AWS:<br>
+        Planejamento e execução da migração de ambientes locais para a nuvem.
+      </div>
+      <div class="service">
+        Armazenamento e backup:<br>
+        Soluções seguras e escaláveis de armazenamento de dados.
+      </div>
+      <div class="service">
+        Infraestrutura como código (IaC):<br>
+        Automação eficiente da infraestrutura com controle de versões, consistência e rapidez na entrega.
+      </div>
+      <div class="service">
+        Consultoria estratégica e suporte:<br>
+        Análise de arquitetura, otimização de custos, modernização da infraestrutura e suporte técnico especializado.
+      </div>
+      <div class="service">
+        Segurança:<br>
+        Proteção de dados, conformidade com normas e segurança avançada em cloud.
+      </div>
+      <div class="service">
+        Inteligência artificial:<br>
+        Integração de IA, otimização operacional e inovação.
+      </div>
+    </div>
+  </section>
+
+  <section id="proznews">
+    <div class="proznews-container">
+      <h3>ProzNews</h3>
+      <p>Fique por dentro das últimas novidades sobre soluções AWS e transformações digitais na nuvem com a ProzNews.
+        Receba dicas, tendências e insights diretamente no seu e-mail, se cadastrando para receber a newsletter diária!
+      </p>
+      <div class="proznews-form">
+
+        <input type="text" name="name" placeholder="Seu nome" required
+          style="color: #1f1f1f; background-color: #ffffff;" />
+        <input type="email" name="email" placeholder="Seu e-mail" required
+          style="color: #1f1f1f; background-color: #ffffff;" />
+        <button type="submit">Cadastrar</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="aws-badge-container">
+    <p>Parceiro oficial:</p>
+    <div class="aws-badge">
+      <img src="https://proz-arquitetos-pi.s3.sa-east-1.amazonaws.com/images/aws-badge.png "
+        alt="AWS Partner Network Badge">
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Proz Cloud. Todos os direitos reservados.
+  </footer>
+
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+
+  <script>
+    document.querySelector('.proznews-form button[type="submit"]').addEventListener('click', async (event) => {
+      event.preventDefault();
+
+      const nameInput = document.querySelector('input[name="name"]');
+      const emailInput = document.querySelector('input[name="email"]');
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+
+      if (!name || !email) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+      }
+
+      try {
+        const response = await fetch('https://ouf1mt2kx4.execute-api.sa-east-1.amazonaws.com/prod/subscribe ', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, email })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        alert(data.message);
+        nameInput.value = '';
+        emailInput.value = '';
+      } catch (error) {
+        console.error(error);
+        alert('Ocorreu um erro ao enviar os dados. Verifique sua conexão e tente novamente.');
+      }
+    });
+  </script>
+</body>
+
+</html>

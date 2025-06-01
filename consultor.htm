@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel do Consultor</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* Seu CSS permanece igual ao que enviou anteriormente */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #1E3A8A;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #000000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      position: relative;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+    }
+    .logo i {
+      margin-right: 8px;
+    }
+    .title-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .logout-button {
+      padding: 12px 24px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #007BFF;
+      color: #fff;
+      transition: background-color 0.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .logout-button:hover {
+      background-color: #0056b3;
+    }
+    .content {
+      padding: 40px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h2 {
+      color: #ffffff;
+      font-size: 26px;
+      margin-bottom: 20px;
+      text-align: center;
+      width: 100%;
+    }
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+    .filter-bar input,
+    .filter-bar select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.2s ease-in-out;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .card h3 {
+      margin: 0;
+      color: #007BFF;
+      font-size: 18px;
+    }
+    .card p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: #333;
+    }
+    .card .actions {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .card button {
+      padding: 8px;
+      font-size: 13px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #007BFF;
+      color: #fff;
+      transition: background-color 0.2s ease-in-out;
+      width: 100%;
+    }
+    .card button:hover {
+      background-color: #0056b3;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      border-top: 1px solid #ddd;
+      margin-top: auto;
+      font-size: 14px;
+      color: #555;
+    }
+    @media (max-width: 768px) {
+      header {
+        padding: 15px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo {
+        margin-bottom: 5px;
+      }
+      .title-container {
+        position: static;
+      }
+      .title {
+        font-size: 24px;
+      }
+      .logout-button {
+        width: 100%;
+      }
+      .content {
+        padding: 15px;
+      }
+      h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo"><i data-lucide="cloud"></i> Proz Cloud</div>
+    <div class="title-container">
+      <div class="title">Painel do Consultor</div>
+    </div>
+    <button class="logout-button"><i data-lucide="log-out"></i> Sair</button>
+  </header>
+  <div class="content">
+    <h2>Solicitações de Orçamento</h2>
+    <div class="filter-bar">
+      <input type="text" placeholder="Buscar por nome..." id="searchInput" />
+      <select id="filterServico">
+        <option value="">Todos os serviços</option>
+        <option value="Migração">Migração</option>
+        <option value="Consultoria">Consultoria</option>
+        <option value="IaC">IaC</option>
+      </select>
+    </div>
+    <div class="cards-container" id="cardsContainer"></div>
+  </div>
+  <footer>© 2025 Proz Cloud. Todos os direitos reservados.</footer>
+
+  <script>
+  const API_URL = 'https://8kwr0229k8.execute-api.sa-east-1.amazonaws.com/dev/solicitacoes';
+  let solicitacoes = [];
+
+  function renderCards(data) {
+    const $container = $('#cardsContainer');
+    $container.empty();
+
+    if (!Array.isArray(data)) {
+      console.warn('renderCards: data não é um array');
+      return;
+    }
+
+    data.forEach(s => {
+      const $card = $(`
+        <div class="card" data-servico="${s.servico || ''}">
+          <h3>${s.nome} - ${s.empresa || ''}</h3>
+          <p><strong>Contato:</strong> ${s.contato || ''}</p>
+          <p><strong>Email:</strong> ${s.email}</p>
+          <p><strong>Serviço:</strong> ${s.servico || ''}</p>
+          <p><strong>Mensagem:</strong> ${s.mensagem}</p>
+          <div class="actions">
+            <button class="btn-responder" data-id="${s.id}">Responder</button>
+            <button class="btn-arquivar" data-id="${s.id}">Arquivar</button>
+          </div>
+        </div>
+      `);
+      $container.append($card);
+    });
+  }
+
+  async function carregarSolicitacoes() {
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error(`Erro ${res.status}: ${res.statusText}`);
+      solicitacoes = await res.json();
+      renderCards(solicitacoes);
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  }
+
+  $(document).ready(function () {
+    lucide.createIcons();
+    carregarSolicitacoes();
+
+    // Filtro por texto ou serviço
+    $('#searchInput, #filterServico').on('input change', function () {
+      const termo = $('#searchInput').val().toLowerCase();
+      const servico = $('#filterServico').val();
+
+      const filtradas = solicitacoes.filter(s =>
+        s.nome.toLowerCase().includes(termo) &&
+        (servico === '' || s.servico === servico)
+      );
+
+      renderCards(filtradas);
+    });
+
+    // Botão arquivar
+    $('#cardsContainer').on('click', '.btn-arquivar', async function () {
+      const id = $(this).data('id');
+      try {
+        await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+        await carregarSolicitacoes();
+      } catch (error) {
+        console.error('Erro ao arquivar:', error);
+      }
+    });
+
+    // Botão responder
+	$('#cardsContainer').on('click', '.btn-responder', async function () {
+	  const id = $(this).data('id');
+	  const solicitacao = solicitacoes.find(s => s.id === id);
+
+	  if (!solicitacao) {
+		alert("Solicitação não encontrada.");
+		return;
+	  }
+
+	  try {
+		const response = await fetch(`${API_URL}/responder`, {
+		  method: 'POST',
+		  headers: { 'Content-Type': 'application/json' },
+		  body: JSON.stringify({
+			email: solicitacao.email,
+			nome: solicitacao.nome
+		  })
+		});
+
+		if (!response.ok) throw new Error(`Erro ao enviar resposta: ${response.status}`);
+
+		alert(`E-mail enviado para ${solicitacao.email}`);
+		await carregarSolicitacoes();
+	  } catch (error) {
+		console.error('Erro ao responder:', error);
+		alert('Erro ao enviar resposta.');
+	  }
+	});
+
+    // Filtro direto pela combobox
+    $('#filterServico').on('change', function () {
+      const filtro = $(this).val().toLowerCase();
+
+      $('.card').each(function () {
+        const servico = $(this).data('servico')?.toLowerCase() || '';
+        $(this).toggle(!filtro || servico === filtro);
+      });
+    });
+
+    // Logout
+    $('.logout-button').on('click', function () {
+      localStorage.removeItem("token");
+      window.location.href = `https://sa-east-1nuircal4r.auth.sa-east-1.amazoncognito.com/logout?client_id=6uufme34atdbq7mgtbe8biglu5&logout_uri=https://proz-arquitetos-pi.s3.sa-east-1.amazonaws.com/login.html`;
+    });
+  });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Proz Cloud - Solicite um orçamento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-image: url('https://proz-arquitetos-pi.s3.sa-east-1.amazonaws.com/images/cloud-image.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #1f1f1f;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #000; 
+            padding: 15px; 
+            font-size: 24px; 
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header div {
+            color: #fff; 
+            display: flex;
+            align-items: center;
+        }
+
+        header div i {
+            margin-right: 8px; 
+        }
+
+        .inicio-btn {
+            padding: 8px 12px; 
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px; 
+        }
+
+        .inicio-btn:hover {
+            background-color: #0056b3;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px; 
+        }
+
+        form {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            padding: 20px; 
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 15px; 
+            font-size: 20px; 
+        }
+
+        label {
+            display: block;
+            margin-top: 10px; 
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+            font-size: 14px; 
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px; 
+            margin-bottom: 10px; 
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px; 
+        }
+
+        button {
+            width: 100%;
+            padding: 10px; 
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            display: none;
+            margin-top: 10px;
+            font-size: 14px; 
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px; 
+            font-size: 12px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        
+        @media (max-width: 600px) {
+            header {
+                font-size: 20px;
+                padding: 10px;
+            }
+
+            .inicio-btn {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+
+            main {
+                padding: 15px;
+            }
+
+            form {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            label {
+                font-size: 12px;
+                margin-top: 8px;
+            }
+
+            input, textarea, select, button {
+                font-size: 14px;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            footer {
+                padding: 10px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div><i data-lucide="cloud"></i> Proz Cloud</div>
+        <a href="index.html" class="inicio-btn"><i data-lucide="home"></i> Início</a>
+    </header>
+
+    <main>
+        <form id="orcamentoForm">
+            <h2>Solicite um orçamento</h2>
+
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="empresa">Nome da empresa</label>
+            <input type="text" id="empresa" name="empresa" required>
+
+            <label for="contato">Telefone ou WhatsApp</label>
+            <input type="text" id="contato" name="contato" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="servico">Serviço desejado</label>
+            <select id="servico" name="servico" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Migração de ambiente para a AWS">Migração de ambiente para a AWS</option>
+                <option value="Armazenamento e backup">Armazenamento e backup</option>
+                <option value="Infraestrutura como código (IaC)">Infraestrutura como código (IaC)</option>
+                <option value="Consultoria estratégica e suporte">Consultoria estratégica e suporte</option>
+                <option value="Segurança">Segurança</option>
+                <option value="Inteligência artificial">Inteligência artificial</option>
+            </select>
+
+            <label for="mensagem">Descreva a sua necessidade</label>
+            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+
+            <button type="submit">Enviar</button>
+
+            <p class="success-message" id="successMessage">Enviado com sucesso! Entraremos em contato em breve.</p>
+        </form>
+    </main>
+
+    <footer>
+        © 2025 Proz Cloud. Todos os direitos reservados.
+    </footer>
+
+    <script>
+    lucide.createIcons();
+    const form = document.getElementById('orcamentoForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const data = {
+            nome: form.nome.value,
+            empresa: form.empresa.value,
+            contato: form.contato.value,
+            email: form.email.value,
+            servico: form.servico.value,
+            mensagem: form.mensagem.value
+        };
+
+        try {
+            const response = await fetch('https://bdeyxrat92.execute-api.sa-east-1.amazonaws.com/dev/solicitacao-orcamento', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                form.reset();
+                successMessage.style.display = 'block';
+            } else {
+                alert('Erro ao enviar. Tente novamente.');
+            }
+        } catch (error) {
+            alert('Erro de conexão. Tente novamente mais tarde.');
+            console.error(error);
+        }
+    });
+</script>
+
+
+</body>
+</html>
